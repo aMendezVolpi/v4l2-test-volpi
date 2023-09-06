@@ -16,11 +16,13 @@ void printHelp()
         printf("  -f,        Set pixel format\n");
         printf("  --fb,      Output the image to the framebuffer\n");
         printf("  -g,        Set gain value\n");
+        printf("  -G,        Get gain value\n");
         printf("  -h,        Set image height\n");
         printf("  --hist,    Print histogram of the image\n");
         printf("  --help,    Show this help\n");
         printf("  -i,        Start single image acquisition\n");
         printf("  -l,        Set delay in us in image acquisition loop\n");
+        printf("  -lc,       List controls\n");
         printf("  -m,        Set IO mode\n");
         printf("  -n,        Number of images to captured\n");
         printf("  -p,        Print image data in format (1: bin, 10: dec, 16: hex)\n");
@@ -74,6 +76,9 @@ int main(int argc, const char *argv[])
         if (args.exists("-e")) {
                 imageSource.setExposure(args.optionInt("-e"));
         }
+        if (args.exists("-G")) {
+                printf("Gain: %d\n", imageSource.getGain());
+        }
         if (args.exists("-g")) {
                 imageSource.setGain(args.optionInt("-g"));
         }
@@ -85,6 +90,9 @@ int main(int argc, const char *argv[])
         }
         if (args.exists("-t")) {
                 imageSource.setTriggerMode(args.optionInt("-t"));
+        }
+        if (args.exists("-lc")) {
+                imageSource.listControls();
         }
         if (args.exists("-m")) {
                 imageSource.setIOMode(args.optionInt("-m"));

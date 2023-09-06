@@ -23,7 +23,8 @@ public:
         int getNextImage(V4L2Image &Image, int Timeout, bool LastImage = true);
         int releaseImage(V4L2Image &Image);
         int getImage(V4L2Image &image, int Timeout, bool LastImage = true);
-
+        
+        int getGain();
         int setGain(int gain);
         int setExposure(int exposure);
         int setBlackLevel(int blackLevel);
@@ -32,12 +33,16 @@ public:
         int setIOMode(int ioMode);
         int setFrameRate(int frameRate);
 
+        int listControls();
+
 protected:
         int m_deviceFd;
-        int m_subDeviceFd;
-        
-        int setControl(unsigned int id, int value);
+        int m_subDeviceFd;   
+        int getControl(unsigned int id);  
+        int setControl(unsigned int id, int value);        
+        int getExtControl(unsigned int id, unsigned int type);
         int setExtControl(unsigned int id, unsigned int type, int value);
+        int getControl(std::string name);
         int setControl(std::string name, int value);
 
 private:
